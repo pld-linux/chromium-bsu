@@ -7,7 +7,9 @@ Release:	9
 License:	Artistic
 Group:		X11/Applications/Games
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
+# Source0-md5:	969883f2f20f10cd6cdb380582f130c4
 Source1:	http://www.reptilelabour.com/software/files/chromium/%{name}-data-%{version}.tar.gz
+# Source1-md5:	173fdf76f1e4d7496142cd5662456a73
 Source2:	%{name}.desktop
 Source3:	%{name}-setup.desktop
 Source4:	%{name}.png
