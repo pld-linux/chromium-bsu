@@ -116,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/{Games/Arcade,Settings},%{_pixmapsdir},%{_bindir},%{_datadir}}
 
 # It is enough to install one file
-#%{__make} install DESTDIR=RPM_BUILD_ROOT
+#%%{__make} install DESTDIR=RPM_BUILD_ROOT
 install bin/* $RPM_BUILD_ROOT/%{_bindir}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade/%{name}.desktop
