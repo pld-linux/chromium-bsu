@@ -7,50 +7,35 @@ License:	Artistic
 Group:		X11/Applications/Games
 Group(de):	X11/Applikationen/Spiele
 Group(pl):	X11/Aplikacje/Gry
+
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
 Source1:	http://www.reptilelabour.com/software/files/chromium/%{name}-data-%{version}.tar.gz
 Source2:	%{name}.desktop
 Source3:	%{name}-setup.desktop
 Source4:	%{name}.png
 
-# This one allows definitions of all compile flags directly in .spec
-# by just commenting out those settings in Makefiles
-# This is patch from Mandrake Cooker
-Patch0:         chromium-0.9.12-fix-flags.patch
-# To be further investigated if this patch is needed
-# This is patch from Mandrake Cooker
-Patch1:         chromium-0.9.11-glibc-2.2.2.patch
-#Patch0 from RH obsoleted by much better idea from Mandrake
-#to setup OPENAL_OPT_FLAGS in spec (patch3 below)
-# This is patch from Mandrake Cooker
-#Patch0:	%{name}-config.patch
-Patch3:         chromium-0.9.12-fix-openal-configurecall.patch
-# This one fixes problems with ./configure (/bin/sh is NOT a link
-# to /bin/bash in PLD
-# This is patch from fastviper
+Patch0:         chromium-fix-flags.patch
+Patch1:         chromium-glibc-2.2.2.patch
+Patch3:         chromium-fix-openal-configurecall.patch
 Patch4:         %{name}-configure_needs_bash.patch
-# As PLD doesn't have any QTDIR it's necessary to change Makefile
-# so that /usr/X11R6 could be one.
-# This is patch from fastviper
 Patch5:         %{name}-qt.patch
-# This patch comments out CC and CCX settings in Makefile allowing
-# use of nondefault compiler/linker. export CC from .spec
-# This is patch from fastviper
 Patch6:         %{name}-use_proper_CC.patch
 
-BuildRequires:  libogg-devel qt-devel SDL-devel libvorbis-devel
 URL:		http://www.reptilelabour.com/software/chromium/
-BuildPrereq:	SDL-devel >= 1.1.6
+
 BuildRequires:	OpenGL-devel
-#BuildPrereq:	kdelibs-sound-devel
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	SDL-devel >= 1.1.6
+BuildRequires:	libogg-devel libvorbis-devel
+BuildRequires:	smpeg >= 0.4.2
+BuildRequires:	qt-devel
+
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
 %define         _prefix         /usr/X11R6/
 %define		_mandir		%{_prefix}/man
 %define		_bindir		%{_prefix}/bin
-%define         _gamesbindir    %{_bindir}
-%define         _gamesdatadir   %{_prefix}/share/games
+%define         _datadir	%{_prefix}/share/games
 %define         _noautoreqdep   libGL.so.1 libGLU.so.1 libGLcore.so.1
 %define         _noreqdep       libGL.so.1 libGLU.so.1 libGLcore.so.1
 
@@ -115,16 +100,17 @@ find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 
 %build
-export CFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
-export CXXFLAGS="%{rpmcflags} -fno-omit-frame-pointer"
+export CFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
+export CXXFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
 export CC=%{__cc}
 export CXX=%{__cc}
 export LINK=%{__cc}
-export DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_gamesbindir}\\\" \
-	    -DPKGDATADIR=\\\"%{_gamesdatadir}/Chromium-0.9\\\" -DUSE_SDL \
+export DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
+	    -DPKGDATADIR=\\\"%{_datadir}/Chromium-0.9\\\" -DUSE_SDL \
 	    `sdl-config --cflags` -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT \
 	    -I../../include -I../support/openal/linux/include -I../support/openal/include"
-export OPENAL_CONFIG_OPTS="./configure %{_target_platform} --with-gcc=%{__cc}"
+#export OPENAL_CONFIG_OPTS="./configure %{_target_platform} --with-gcc=%{__cc}"
+export OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
 export QTDIR=%{_prefix}
 ./configure --enable-vorbis
 %{__make}
@@ -132,33 +118,38 @@ export QTDIR=%{_prefix}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/{Games/Arcade,Settings},%{_pixmapsdir},%{_gamesbindir},%{_gamesdatadir}}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/{Games/Arcade,Settings},%{_pixmapsdir},%{_bindir},%{_datadir}}
 
 # It is enough to install one file
 #%{__make} install DESTDIR=RPM_BUILD_ROOT
-install bin/* $RPM_BUILD_ROOT/%{_gamesbindir}
+install bin/* $RPM_BUILD_ROOT/%{_bindir}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade/%{name}.desktop
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Settings/%{name}.desktop
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
+gzip -9nf README LICENSE
+
 #This installs datafiles
-tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT/%{_gamesdatadir}
+tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT/%{_datadir}
+find . -type d -name CVS -exec rm -rf {} \; ||:
+
+
 
 %files
 %defattr(644,root,root,755)
+%doc LICENSE.gz
 %attr(755,root,root) %{_bindir}/*
+%{_datadir}/*
 %{_pixmapsdir}/chromium.png
 %{_applnkdir}/Games/Arcade/*
-%{_applnkdir}/Settings/*
-#%{_prefix}/games/chromium
-%{_gamesdatadir}/*
+
 
 %files setup
 %defattr(644,root,root,755)
-%doc README
+%doc README.gz
 %attr(755,root,root) %{_bindir}/chromium-setup
- 
+%{_applnkdir}/Settings/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
