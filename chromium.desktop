@@ -7,4 +7,5 @@ Comment[ja]=クロミウム
 Icon=chromium.png
 Exec=chromium
 Terminal=false
+Categories=Game;ArcadeGame;
 Type=Application
