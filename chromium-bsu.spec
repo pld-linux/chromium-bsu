@@ -32,9 +32,7 @@ BuildRequires:	qt-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         _datadir	%{_prefix}/usr/games
 %define         _noautoreqdep   libGL.so.1 libGLU.so.1 libGLcore.so.1
-%define         _noreqdep       libGL.so.1 libGLU.so.1 libGLcore.so.1
 
 %description
 You are captain of the cargo ship Chromium B.S.U., responsible for
@@ -134,10 +132,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/chromium
 %{_datadir}/*
 %{_pixmapsdir}/chromium.png
-%{_desktopdir}/{name}.desktop
+%{_desktopdir}/%{name}.desktop
 
 %files setup
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_bindir}/chromium-setup
-%{_desktopdir}/{name}-setup.desktop
+%{_desktopdir}/%{name}-setup.desktop
