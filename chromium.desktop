@@ -2,6 +2,7 @@
 Name=Chromium
 Comment=A fast paced, arcade-style space shooter
 Comment[de]=Ein schnelles Arcade Weltraum Ballerspiel
+Comment[ja]=クロミウム
 Icon=chromium.png
 Exec=chromium
 Terminal=0
