@@ -7,5 +7,5 @@ Comment[pl]=Konfigurator Chromium
 Icon=chromium.png
 Exec=chromium-setup
 Terminal=false
-Categories=Game;ArcadeGame;
+Categories=Settings;
 Type=Application
