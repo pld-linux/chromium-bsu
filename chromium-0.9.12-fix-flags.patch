@@ -1,0 +1,136 @@
+--- ./src/Makefile.gege	Tue May 22 07:25:50 2001
++++ ./src/Makefile	Fri May 25 16:36:51 2001
+@@ -10,8 +10,8 @@
+ 
+ CC	=	gcc
+ CXX	=	g++
+-CFLAGS	=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -O2 -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT
+-CXXFLAGS=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -O2 -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT
++#CFLAGS	=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -O2 -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT
++#CXXFLAGS=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -O2 -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT
+ INCPATH	=	-I../support/include -I../support/glpng/include -I/usr/X11R6/include
+ LINK	=	g++
+ LFLAGS	=	
+@@ -162,19 +162,19 @@
+ .SUFFIXES: .cpp .cxx .cc .C .c
+ 
+ .cpp.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .cxx.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .cc.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .C.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .c.o:
+-	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
++	$(CC) -c $(CFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ ####### Build rules
+ 
+--- ./src-setup/Makefile.gege	Mon May 21 09:47:11 2001
++++ ./src-setup/Makefile	Fri May 25 16:41:21 2001
+@@ -10,8 +10,8 @@
+ 
+ CC	=	gcc
+ CXX	=	g++
+-CFLAGS	=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -Wall -W -g -D_REENTRANT
+-CXXFLAGS=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -Wall -W -g -D_REENTRANT
++#CFLAGS	=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -Wall -W -g -D_REENTRANT
++#CXXFLAGS=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -Wall -W -g -D_REENTRANT
+ INCPATH	=	-I$(QTDIR)/include
+ LINK	=	g++
+ LFLAGS	=	
+@@ -74,19 +74,19 @@
+ .SUFFIXES: .cpp .cxx .cc .C .c
+ 
+ .cpp.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .cxx.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .cc.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .C.o:
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ .c.o:
+-	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
++	$(CC) -c $(CFLAGS) $(INCPATH) $(DEFS) -o $@ $<
+ 
+ ####### Build rules
+ 
+--- ./src-setup/MainWidget.cpp.gege	Mon May 21 09:46:39 2001
++++ ./src-setup/MainWidget.cpp	Fri May 25 16:41:58 2001
+@@ -153,7 +153,7 @@
+ {
+ 	char	buffer[256];
+ 	FILE	*inpipe;
+-	QFileInfo	fileInfo(CHROMIUM_EXEC);
++	QFileInfo	fileInfo(GAMESBINDIR "/chromium");
+ 	
+ 	if(!fileInfo.isExecutable()) // if file isn't there, let's look in the same directory as this one...
+ 	{
+--- ./support/glpng/src/Makefile.gege	Thu Feb  8 06:03:24 2001
++++ ./support/glpng/src/Makefile	Fri May 25 16:37:37 2001
+@@ -9,8 +9,8 @@
+ 
+ CC	=	gcc
+ CXX	=	g++
+-CFLAGS	=	-pipe -O2
+-CXXFLAGS=	-pipe -O2
++#CFLAGS	=	-pipe -O2
++#CXXFLAGS=	-pipe -O2
+ INCPATH	=	-I../include -I/usr/include -I/usr/X11R6/include
+ AR	=	ar cqs
+ RANLIB	=	
+--- ./src-setup/Makefile.gege	Fri May 25 16:53:43 2001
++++ ./src-setup/Makefile	Fri May 25 16:58:05 2001
+@@ -200,15 +200,15 @@
+ 
+ moc/moc_ConfigFile.o: moc/moc_ConfigFile.cpp \
+ 		ConfigFile.h
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc/moc_ConfigFile.o moc/moc_ConfigFile.cpp
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o moc/moc_ConfigFile.o moc/moc_ConfigFile.cpp
+ 
+ moc/moc_HelpPage.o: moc/moc_HelpPage.cpp \
+ 		HelpPage.h
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc/moc_HelpPage.o moc/moc_HelpPage.cpp
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o moc/moc_HelpPage.o moc/moc_HelpPage.cpp
+ 
+ moc/moc_HiScoreWidget.o: moc/moc_HiScoreWidget.cpp \
+ 		HiScoreWidget.h
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc/moc_HiScoreWidget.o moc/moc_HiScoreWidget.cpp
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o moc/moc_HiScoreWidget.o moc/moc_HiScoreWidget.cpp
+ 
+ moc/moc_MainWidget.o: moc/moc_MainWidget.cpp \
+ 		MainWidget.h \
+@@ -217,12 +217,12 @@
+ 		Audio.h \
+ 		ConfigFile.h \
+ 		HiScoreWidget.h
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc/moc_MainWidget.o moc/moc_MainWidget.cpp
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o moc/moc_MainWidget.o moc/moc_MainWidget.cpp
+ 
+ moc/moc_PlayList.o: moc/moc_PlayList.cpp \
+ 		PlayList.h \
+ 		Audio.h
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc/moc_PlayList.o moc/moc_PlayList.cpp
++	$(CXX) -c $(CXXFLAGS) $(INCPATH) $(DEFS) -o moc/moc_PlayList.o moc/moc_PlayList.cpp
+ 
+ moc/moc_ConfigFile.cpp: ConfigFile.h
+ 	$(MOC) ConfigFile.h -o moc/moc_ConfigFile.cpp
