@@ -119,14 +119,14 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/{Games/Arcade,Settings},%{_pixmapsdir},
 
 # It is enough to install one file
 #%%{__make} install DESTDIR=RPM_BUILD_ROOT
-install bin/* $RPM_BUILD_ROOT/%{_bindir}
+install bin/* $RPM_BUILD_ROOT%{_bindir}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade/%{name}.desktop
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Settings/%{name}.desktop
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 #This installs datafiles
-tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT/%{_datadir}
+tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT%{_datadir}
 find . -type d -name CVS -exec rm -rf {} \; ||:
 
 %clean
