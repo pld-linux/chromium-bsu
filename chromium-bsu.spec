@@ -19,6 +19,7 @@ Patch5:		%{name}-qt.patch
 Patch6:		%{name}-use_proper_CC.patch
 Patch7:		%{name}-fix-qt3.patch
 Patch8:		%{name}-ac_fix.patch
+Patch9:		%{name}-shared-zlib.patch
 URL:		http://www.reptilelabour.com/software/chromium/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
@@ -26,6 +27,7 @@ BuildRequires:	libogg-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	smpeg-devel >= 0.4.2
 BuildRequires:	qt-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6/
@@ -91,6 +93,7 @@ listê muzyki do odtwarzania.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 %build
