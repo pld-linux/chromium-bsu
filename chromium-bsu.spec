@@ -2,7 +2,7 @@ Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl):	Chromium B.S.U. to szybko tocz±ca siê strzelanina
 Name:		chromium
 Version:	0.9.12
-Release:	8
+Release:	9
 License:	Artistic
 Group:		X11/Applications/Games
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
@@ -67,7 +67,6 @@ Summary:	Setup frontend for Chromium
 Summary(pl):	Graficzny konfigurator Chromium
 Group:		X11/Applications/Games
 Requires:	%{name} = %{version}-%{release}
-Requires:	qt
 
 %description setup
 This package contains the setup frontend (using QT) to ease
@@ -89,18 +88,19 @@ listê muzyki do odtwarzania.
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 %build
-export CFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
-export CXXFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
-export CC=%{__cc}
-export CXX=%{__cc}
-export LINK=%{__cc}
-export DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
+CFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
+CXXFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
+CC=%{__cc}
+CXX=%{__cc}
+LINK=%{__cc}
+DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
 	    -DPKGDATADIR=\\\"%{_datadir}/Chromium-0.9\\\" -DUSE_SDL \
 	    `sdl-config --cflags` -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT \
 	    -I../../include -I../support/openal/linux/include -I../support/openal/include"
 #export OPENAL_CONFIG_OPTS="./configure %{_target_platform} --with-gcc=%{__cc}"
-export OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
-export QTDIR=%{_prefix}
+OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
+QTDIR=%{_prefix}
+export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR
 ./configure --enable-vorbis
 %{__make}
 
@@ -122,10 +122,13 @@ gzip -9nf README LICENSE
 tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT/%{_datadir}
 find . -type d -name CVS -exec rm -rf {} \; ||:
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %files
 %defattr(644,root,root,755)
 %doc LICENSE.gz
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/chromium
 %{_datadir}/*
 %{_pixmapsdir}/chromium.png
 %{_applnkdir}/Games/Arcade/*
@@ -135,6 +138,3 @@ find . -type d -name CVS -exec rm -rf {} \; ||:
 %doc README.gz
 %attr(755,root,root) %{_bindir}/chromium-setup
 %{_applnkdir}/Settings/*
-
-%clean
-rm -rf $RPM_BUILD_ROOT
