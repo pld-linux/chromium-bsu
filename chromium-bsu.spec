@@ -32,8 +32,7 @@ BuildRequires:	qt-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_bindir		%{_prefix}/bin
-%define         _datadir	%{_prefix}/share/games
+%define         _datadir	%{_prefix}/usr/games
 %define         _noautoreqdep   libGL.so.1 libGLU.so.1 libGLcore.so.1
 %define         _noreqdep       libGL.so.1 libGLU.so.1 libGLcore.so.1
 
@@ -106,7 +105,6 @@ DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
 	    -DPKGDATADIR=\\\"%{_datadir}/Chromium-0.9\\\" -DUSE_SDL \
 	    `sdl-config --cflags` -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT \
 	    -I../../include -I../support/openal/linux/include -I../support/openal/include"
-#export OPENAL_CONFIG_OPTS="./configure %{_target_platform} --with-gcc=%{__cc}"
 OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
 QTDIR=%{_prefix}
 export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR
@@ -117,8 +115,6 @@ export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir},%{_datadir}}
 
-# It is enough to install one file
-#%%{__make} install DESTDIR=RPM_BUILD_ROOT
 install bin/* $RPM_BUILD_ROOT%{_bindir}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
