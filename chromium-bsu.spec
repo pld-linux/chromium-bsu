@@ -115,14 +115,14 @@ export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/{Games/Arcade,Settings},%{_pixmapsdir},%{_bindir},%{_datadir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir},%{_datadir}}
 
 # It is enough to install one file
 #%%{__make} install DESTDIR=RPM_BUILD_ROOT
 install bin/* $RPM_BUILD_ROOT%{_bindir}
 
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade/%{name}.desktop
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Settings/%{name}.desktop
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 #This installs datafiles
@@ -138,10 +138,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/chromium
 %{_datadir}/*
 %{_pixmapsdir}/chromium.png
-%{_applnkdir}/Games/Arcade/*
+%{_desktopdir}/{name}.desktop
 
 %files setup
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_bindir}/chromium-setup
-%{_applnkdir}/Settings/*
+%{_desktopdir}/{name}-setup.desktop
