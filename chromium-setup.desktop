@@ -9,3 +9,4 @@ Exec=chromium-setup
 Terminal=false
 Categories=Settings;
 Type=Application
+# vi: encoding=utf-8
