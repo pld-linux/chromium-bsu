@@ -19,7 +19,7 @@ Patch6:		%{name}-use_proper_CC.patch
 URL:		http://www.reptilelabour.com/software/chromium/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
-BuildRequires:	libogg-devel libvorbis-devel
+BuildRequires:	libogg-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	smpeg-devel >= 0.4.2
 BuildRequires:	qt-devel
