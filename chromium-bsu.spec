@@ -157,7 +157,7 @@ tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT/%{_gamesdatadir}
 %files setup
 %defattr(644,root,root,755)
 %doc README
-%{_bindir}/chromium-setup
+%attr(755,root,root) %{_bindir}/chromium-setup
  
 
 %clean
