@@ -5,8 +5,6 @@ Version:	0.9.12
 Release:	8
 License:	Artistic
 Group:		X11/Applications/Games
-Group(de):	X11/Applikationen/Spiele
-Group(pl):	X11/Aplikacje/Gry
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
 Source1:	http://www.reptilelabour.com/software/files/chromium/%{name}-data-%{version}.tar.gz
 Source2:	%{name}.desktop
@@ -68,8 +66,6 @@ flotê automatycznych my¶liwców, którymi mo¿esz kierowaæ ze statku.
 Summary:	Setup frontend for Chromium
 Summary(pl):	Graficzny konfigurator Chromium
 Group:		X11/Applications/Games
-Group(de):	X11/Applikationen/Spiele
-Group(pl):	X11/Aplikacje/Gry
 Requires:	%{name} = %{version}-%{release}
 Requires:	qt
 
