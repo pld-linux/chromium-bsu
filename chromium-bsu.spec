@@ -72,11 +72,11 @@ Group:		X11/Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
 %description setup
-This package contains the setup frontend (using QT) to ease
+This package contains the setup frontend (using Qt) to ease
 configuration of Chromium, especially for its playlist features.
 
 %description setup -l pl
-Ten pakiet zawiera graficzny konfigurator (napisany w QT) u³atwiaj±cy
+Ten pakiet zawiera graficzny konfigurator (napisany w Qt) u³atwiaj±cy
 ustalanie parametrów dla gry Chromium, szczególnie je¶li chodzi o
 listê muzyki do odtwarzania.
 
