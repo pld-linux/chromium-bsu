@@ -1,4 +1,5 @@
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
+Summary(pl):	Chromium B.S.U. to szybko tocz±ca siê strzelanina
 Name:		chromium
 Version:	0.9.12
 Release:	7
@@ -38,13 +39,26 @@ safety of the Chromium vessel.
   cause your current fighter to self-destruct. Before the ship blows up,
   it ejects its ammunition so that the next fighter can pick it up.
 
+%description -l pl
+Jeste¶ kapitanem statku Chromium B.S.U, odpowiedzialnego za
+dostarczenie zapasów do oddzia³ów na linii frontu. Statek ma ma³±
+flotê automatycznych my¶liwców, którymi mo¿esz kierowaæ ze statku.
+- Nie pozwól ¯ADNEMU wrogowi przej¶æ za swoje my¶liwce! Ka¿dy statek
+  który dotrze na dó³ ekranu zaatakuje Chromium i stracisz my¶liwca.
+- U¿ywaj my¶liwców jako broni! Uderzaj we wrogów aby zniszczyæ ich
+  zanim oni przedostan± siê do ciebie.
+- Strategiczne samobójstwo to dobra taktyka! Kiedy Chromium odpala
+  nowego my¶liwca, wytwarza du¿o energii, która niszczy wszystkich
+  wrogów w zasiêgu.
+- Autodestrukcja pozwala zachowaæ amunicjê - przed wysadzeniem siê
+  my¶liwiec zwraca amunicjê tak, ¿e nastêpny mo¿e j± przej±æ.
+
 %prep
 %setup -q -n Chromium-0.9 -a 1
 %patch -p1
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 %build
-CFLAGS="%{rpmcflags}"
 %configure
 %{__make}
 
@@ -52,17 +66,18 @@ CFLAGS="%{rpmcflags}"
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/applnk/Games \
-         $RPM_BUILD_ROOT%{_datadir}/pixmaps
 
-install %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/X11/applnk/Games
-install %{SOURCE4} $RPM_BUILD_ROOT%{_datadir}/pixmaps
+install -d $RPM_BUILD_ROOT{%{_applnkdir},%{_pixmapsdir}
+
+install %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_datadir}/pixmaps/chromium.xpm
+%{_pixmapsdir}/chromium.xpm
 %{_applnkdir}/Games/*
+# ??!!! there is no /usr/X11R6/games in PLD
 %{_prefix}/games/chromium
 
 %clean
