@@ -9,10 +9,10 @@ Group(de):	X11/Applikationen/Spiele
 Group(pl):	X11/Aplikacje/Gry
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
 Source1:	http://www.reptilelabour.com/software/files/chromium/%{name}-data-%{version}.tar.gz
-Source2:	Chromium.desktop
-Source3:	Chromium-Setup.desktop
-Source4:	%{name}.xpm
-Patch0:		%{name}-0.9-config.patch
+Source2:	%{name}.desktop
+Source3:	%{name}-setup.desktop
+Source4:	%{name}.png
+Patch0:		%{name}-config.patch
 URL:		http://www.reptilelabour.com/software/chromium/
 BuildPrereq:	SDL-devel >= 1.1.6
 BuildRequires:	OpenGL-devel
@@ -59,25 +59,26 @@ flotê automatycznych my¶liwców, którymi mo¿esz kierowaæ ze statku.
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 %build
+CFLAGS="%{rpmcflags}"
 %configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/{Games/Arcade,Settings},%{_pixmapsdir}}
 
 %{__make} install DESTDIR=RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{%{_applnkdir},%{_pixmapsdir}
-
-install %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games
+install %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade/%{name}.desktop
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Settings/%{name}.desktop
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %{_pixmapsdir}/chromium.xpm
-%{_applnkdir}/Games/*
-# ??!!! there is no /usr/X11R6/games in PLD
+%{_applnkdir}/Games/Arcade/*
+%{_applnkdir}/Settings/*
 %{_prefix}/games/chromium
 
 %clean
