@@ -1,0 +1,19 @@
+diff -Nru Chromium-0.9/src-setup/Makefile Chromium-0.9-new/src-setup/Makefile
+--- Chromium-0.9/src-setup/Makefile	Sat Dec 22 03:16:41 2001
++++ Chromium-0.9-new/src-setup/Makefile	Sat Dec 22 03:17:42 2001
+@@ -8,12 +8,12 @@
+ include ../config.mak
+ ####### Compiler, tools and options
+ 
+-CC	=	gcc
+-CXX	=	g++
++#CC	=	gcc
++#CXX	=	g++
+ #CFLAGS	=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -Wall -W -g -D_REENTRANT
+ #CXXFLAGS=	-pipe $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -Wall -W -g -D_REENTRANT
+ INCPATH	=	-I$(QTDIR)/include/qt
+-LINK	=	g++
++#LINK	=	g++
+ LFLAGS	=	
+ LIBS	=	$(SUBLIBS) -L$(QTDIR)/lib -L/usr/X11R6/lib  $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS) -lm -pthread -lqt -lXext -lX11 -lm
+ MOC	=	$(QTDIR)/bin/moc
