@@ -5,5 +5,5 @@ Comment[de]=Das Konfigurationsprogramm von Chromium
 Comment[pl]=Konfigurator Chromium
 Icon=chromium.png
 Exec=chromium-setup
-Terminal=0
+Terminal=false
 Type=Application

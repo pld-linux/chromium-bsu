@@ -5,5 +5,5 @@ Comment[de]=Ein schnelles Arcade Weltraum Ballerspiel
 Comment[ja]=クロミウム
 Icon=chromium.png
 Exec=chromium
-Terminal=0
+Terminal=false
 Type=Application
