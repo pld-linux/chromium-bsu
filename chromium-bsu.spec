@@ -1,3 +1,4 @@
+# TODO: make separate package with openal or use external source
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl):	Chromium B.S.U. to szybko tocz±ca siê strzelanina
 Name:		chromium
@@ -16,6 +17,8 @@ Patch3:		%{name}-fix-openal-configurecall.patch
 Patch4:		%{name}-configure_needs_bash.patch
 Patch5:		%{name}-qt.patch
 Patch6:		%{name}-use_proper_CC.patch
+Patch7:		%{name}-fix-qt3.patch
+Patch8:		%{name}-ac_fix.patch
 URL:		http://www.reptilelabour.com/software/chromium/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
@@ -86,6 +89,8 @@ listê muzyki do odtwarzania.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%patch8 -p1
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 %build
