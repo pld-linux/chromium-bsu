@@ -7,30 +7,24 @@ License:	Artistic
 Group:		X11/Applications/Games
 Group(de):	X11/Applikationen/Spiele
 Group(pl):	X11/Aplikacje/Gry
-
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
 Source1:	http://www.reptilelabour.com/software/files/chromium/%{name}-data-%{version}.tar.gz
 Source2:	%{name}.desktop
 Source3:	%{name}-setup.desktop
 Source4:	%{name}.png
-
-Patch0:         chromium-fix-flags.patch
-Patch1:         chromium-glibc-2.2.2.patch
-Patch3:         chromium-fix-openal-configurecall.patch
-Patch4:         %{name}-configure_needs_bash.patch
-Patch5:         %{name}-qt.patch
-Patch6:         %{name}-use_proper_CC.patch
-
+Patch0:		%{name}-fix-flags.patch
+Patch1:		%{name}-glibc-2.2.2.patch
+Patch3:		%{name}-fix-openal-configurecall.patch
+Patch4:		%{name}-configure_needs_bash.patch
+Patch5:		%{name}-qt.patch
+Patch6:		%{name}-use_proper_CC.patch
 URL:		http://www.reptilelabour.com/software/chromium/
-
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
 BuildRequires:	libogg-devel libvorbis-devel
 BuildRequires:	smpeg >= 0.4.2
 BuildRequires:	qt-devel
-
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %define         _prefix         /usr/X11R6/
 %define		_mandir		%{_prefix}/man
@@ -38,7 +32,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define         _datadir	%{_prefix}/share/games
 %define         _noautoreqdep   libGL.so.1 libGLU.so.1 libGLcore.so.1
 %define         _noreqdep       libGL.so.1 libGLU.so.1 libGLcore.so.1
-
 
 %description
 You are captain of the cargo ship Chromium B.S.U., responsible for
@@ -71,12 +64,13 @@ flotê automatycznych my¶liwców, którymi mo¿esz kierowaæ ze statku.
 - Autodestrukcja pozwala zachowaæ amunicjê - przed wysadzeniem siê
   my¶liwiec zwraca amunicjê tak, ¿e nastêpny mo¿e j± przej±æ.
 
-
 %package setup
-Summary:        Setup frontend for Chromium
+Summary:	Setup frontend for Chromium
 Summary(pl):	Graficzny konfigurator Chromium
-Group:          X11/Applications/Games
-Requires:       %{name} = %{version}-%{release}
+Group:		X11/Applications/Games
+Group(de):	X11/Applikationen/Spiele
+Group(pl):	X11/Aplikacje/Gry
+Requires:	%{name} = %{version}-%{release}
 Requires:	qt
 
 %description setup
@@ -85,7 +79,7 @@ configuration of Chromium, especially for its playlist features.
 
 %description setup -l pl
 Ten pakiet zawiera graficzny konfigurator (napisany w QT) u³atwiaj±cy
-ustalanie parametrów dla gry Chromium, szczególnie je¶li chodzi o 
+ustalanie parametrów dla gry Chromium, szczególnie je¶li chodzi o
 listê muzyki do odtwarzania.
 
 %prep
@@ -97,7 +91,6 @@ listê muzyki do odtwarzania.
 %patch5 -p1
 %patch6 -p1
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
-
 
 %build
 export CFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
@@ -114,7 +107,6 @@ export OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
 export QTDIR=%{_prefix}
 ./configure --enable-vorbis
 %{__make}
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -134,8 +126,6 @@ gzip -9nf README LICENSE
 tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT/%{_datadir}
 find . -type d -name CVS -exec rm -rf {} \; ||:
 
-
-
 %files
 %defattr(644,root,root,755)
 %doc LICENSE.gz
@@ -143,7 +133,6 @@ find . -type d -name CVS -exec rm -rf {} \; ||:
 %{_datadir}/*
 %{_pixmapsdir}/chromium.png
 %{_applnkdir}/Games/Arcade/*
-
 
 %files setup
 %defattr(644,root,root,755)
