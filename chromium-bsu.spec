@@ -20,7 +20,8 @@ URL:		http://www.reptilelabour.com/software/chromium/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
 BuildRequires:	libogg-devel libvorbis-devel
-BuildRequires:	smpeg >= 0.4.2
+BuildRequires:	libvorbis-devel
+BuildRequires:	smpeg-devel >= 0.4.2
 BuildRequires:	qt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -116,8 +117,6 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Games/Arcade/%{name}.desktop
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Settings/%{name}.desktop
 install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-gzip -9nf README LICENSE
-
 #This installs datafiles
 tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT/%{_datadir}
 find . -type d -name CVS -exec rm -rf {} \; ||:
@@ -127,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.gz
+%doc LICENSE
 %attr(755,root,root) %{_bindir}/chromium
 %{_datadir}/*
 %{_pixmapsdir}/chromium.png
@@ -135,6 +134,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files setup
 %defattr(644,root,root,755)
-%doc README.gz
+%doc README
 %attr(755,root,root) %{_bindir}/chromium-setup
 %{_applnkdir}/Settings/*
