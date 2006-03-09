@@ -96,9 +96,9 @@ find . -type d -name .xvpics -exec rm -rf {} \; ||:
 %build
 CFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
 CXXFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
-CC=%{__cc}
-CXX=%{__cc}
-LINK=%{__cc}
+CC="%{__cc}"
+CXX="%{__cc}"
+LINK="%{__cc}"
 DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
 	-DPKGDATADIR=\\\"%{_datadir}/Chromium-0.9\\\" -DUSE_SDL \
 	`sdl-config --cflags` -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT \
