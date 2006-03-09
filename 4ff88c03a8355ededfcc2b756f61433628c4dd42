@@ -1,0 +1,2 @@
+- pl translations, use %_pixmapsdir and %_applnkdir macros
+  TODO: fix bindir - there is no /usr/X11R6/games in PLD
