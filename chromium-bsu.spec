@@ -3,7 +3,7 @@ Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl):	Chromium B.S.U. to szybko tocz±ca siê strzelanina
 Name:		chromium
 Version:	0.9.12
-Release:	9
+Release:	10
 License:	Artistic
 Group:		X11/Applications/Games
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
@@ -15,6 +15,7 @@ Source3:	%{name}-setup.desktop
 Source4:	%{name}.png
 Patch0:		%{name}-fix-flags.patch
 Patch1:		%{name}-glibc-2.2.2.patch
+Patch2:		%{name}-gcc3.patch
 Patch3:		%{name}-fix-openal-configurecall.patch
 Patch4:		%{name}-configure_needs_bash.patch
 Patch5:		%{name}-qt.patch
@@ -22,7 +23,9 @@ Patch6:		%{name}-use_proper_CC.patch
 Patch7:		%{name}-fix-qt3.patch
 Patch8:		%{name}-ac_fix.patch
 Patch9:		%{name}-shared-zlib.patch
+Patch10:	%{name}-proper-options.patch
 URL:		http://www.reptilelabour.com/software/chromium/
+BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
 BuildRequires:	libogg-devel
@@ -81,9 +84,10 @@ ustalanie parametrów dla gry Chromium, szczególnie je¶li chodzi o
 listê muzyki do odtwarzania.
 
 %prep
-%setup -q -n Chromium-0.9
+%setup -q -n Chromium-0.9 -a 1
 %patch0 -p0
 %patch1 -p0
+%patch2 -p0
 %patch3 -p0
 %patch4 -p1
 %patch5 -p1
@@ -91,9 +95,11 @@ listê muzyki do odtwarzania.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p0
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 %build
+CHROMIUM_DATA=Chromium-0.9/data
 CFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
 CXXFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
 CC="%{__cc}"
@@ -105,7 +111,7 @@ DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
 	-I../../include -I../support/openal/linux/include -I../support/openal/include"
 OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
 QTDIR=%{_prefix}
-export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR
+export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR CHROMIUM_DATA
 ./configure --enable-vorbis
 %{__make}
 
