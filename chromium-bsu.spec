@@ -1,6 +1,6 @@
 # TODO: make separate package with openal or use external source
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
-Summary(pl.UTF-8):   Chromium B.S.U. to szybko tocząca się strzelanina
+Summary(pl.UTF-8):	Chromium B.S.U. to szybko tocząca się strzelanina
 Name:		chromium
 Version:	0.9.12
 Release:	10
@@ -70,7 +70,7 @@ flotę automatycznych myśliwców, którymi możesz kierować ze statku.
 
 %package setup
 Summary:	Setup frontend for Chromium
-Summary(pl.UTF-8):   Graficzny konfigurator Chromium
+Summary(pl.UTF-8):	Graficzny konfigurator Chromium
 Group:		X11/Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
