@@ -1,6 +1,6 @@
 # TODO: make separate package with openal or use external source
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
-Summary(pl):	Chromium B.S.U. to szybko tocz±ca siê strzelanina
+Summary(pl.UTF-8):   Chromium B.S.U. to szybko toczÄ…ca siÄ™ strzelanina
 Name:		chromium
 Version:	0.9.12
 Release:	10
@@ -54,23 +54,23 @@ safety of the Chromium vessel.
   cause your current fighter to self-destruct. Before the ship blows up,
   it ejects its ammunition so that the next fighter can pick it up.
 
-%description -l pl
-Jeste¶ kapitanem statku Chromium B.S.U, odpowiedzialnego za
-dostarczenie zapasów do oddzia³ów na linii frontu. Statek ma ma³±
-flotê automatycznych my¶liwców, którymi mo¿esz kierowaæ ze statku.
-- Nie pozwól ¯ADNEMU wrogowi przej¶æ za swoje my¶liwce! Ka¿dy statek
-  który dotrze na dó³ ekranu zaatakuje Chromium i stracisz my¶liwca.
-- U¿ywaj my¶liwców jako broni! Uderzaj we wrogów aby zniszczyæ ich
-  zanim oni przedostan± siê do ciebie.
-- Strategiczne samobójstwo to dobra taktyka! Kiedy Chromium odpala
-  nowego my¶liwca, wytwarza du¿o energii, która niszczy wszystkich
-  wrogów w zasiêgu.
-- Autodestrukcja pozwala zachowaæ amunicjê - przed wysadzeniem siê
-  my¶liwiec zwraca amunicjê tak, ¿e nastêpny mo¿e j± przej±æ.
+%description -l pl.UTF-8
+JesteÅ› kapitanem statku Chromium B.S.U, odpowiedzialnego za
+dostarczenie zapasÃ³w do oddziaÅ‚Ã³w na linii frontu. Statek ma maÅ‚Ä…
+flotÄ™ automatycznych myÅ›liwcÃ³w, ktÃ³rymi moÅ¼esz kierowaÄ‡ ze statku.
+- Nie pozwÃ³l Å»ADNEMU wrogowi przejÅ›Ä‡ za swoje myÅ›liwce! KaÅ¼dy statek
+  ktÃ³ry dotrze na dÃ³Å‚ ekranu zaatakuje Chromium i stracisz myÅ›liwca.
+- UÅ¼ywaj myÅ›liwcÃ³w jako broni! Uderzaj we wrogÃ³w aby zniszczyÄ‡ ich
+  zanim oni przedostanÄ… siÄ™ do ciebie.
+- Strategiczne samobÃ³jstwo to dobra taktyka! Kiedy Chromium odpala
+  nowego myÅ›liwca, wytwarza duÅ¼o energii, ktÃ³ra niszczy wszystkich
+  wrogÃ³w w zasiÄ™gu.
+- Autodestrukcja pozwala zachowaÄ‡ amunicjÄ™ - przed wysadzeniem siÄ™
+  myÅ›liwiec zwraca amunicjÄ™ tak, Å¼e nastÄ™pny moÅ¼e jÄ… przejÄ…Ä‡.
 
 %package setup
 Summary:	Setup frontend for Chromium
-Summary(pl):	Graficzny konfigurator Chromium
+Summary(pl.UTF-8):   Graficzny konfigurator Chromium
 Group:		X11/Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
@@ -78,10 +78,10 @@ Requires:	%{name} = %{version}-%{release}
 This package contains the setup frontend (using Qt) to ease
 configuration of Chromium, especially for its playlist features.
 
-%description setup -l pl
-Ten pakiet zawiera graficzny konfigurator (napisany w Qt) u³atwiaj±cy
-ustalanie parametrów dla gry Chromium, szczególnie je¶li chodzi o
-listê muzyki do odtwarzania.
+%description setup -l pl.UTF-8
+Ten pakiet zawiera graficzny konfigurator (napisany w Qt) uÅ‚atwiajÄ…cy
+ustalanie parametrÃ³w dla gry Chromium, szczegÃ³lnie jeÅ›li chodzi o
+listÄ™ muzyki do odtwarzania.
 
 %prep
 %setup -q -n Chromium-0.9 -a 1
