@@ -1,0 +1,11 @@
+--- scripts/configure_functions.orig	2007-08-30 10:52:40.000000000 +0200
++++ scripts/configure_functions	2007-08-30 10:51:51.000000000 +0200
+@@ -204,7 +204,7 @@
+ 		if [ -f $LIBVORBISDIR/vorbisfile.a ]; then
+ 			LIBVORBISFILE="$LIBVORBISDIR/vorbisfile.a"
+ 		else 
+-			if [ -f $LIBVORBISDIR/libvorbisfile.a ]; then
++			if [ -f $LIBVORBISDIR/libvorbisfile.so ]; then
+ 				LIBVORBISFILE="-lvorbisfile"
+ 			else
+ 				LIBVORBISDIR=""
