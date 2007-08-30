@@ -23,11 +23,13 @@ Patch6:		%{name}-use_proper_CC.patch
 Patch7:		%{name}-fix-qt3.patch
 Patch8:		%{name}-ac_fix.patch
 Patch9:		%{name}-shared-zlib.patch
-Patch10:	%{name}-proper-options.patch
+Patch10:	%{name}-libvorbisfile.patch
+Patch11:	%{name}-freealut.patch
 URL:		http://www.reptilelabour.com/software/chromium/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
+BuildRequires:	freealut-devel
 BuildRequires:	libogg-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	smpeg-devel >= 0.4.2
@@ -96,6 +98,7 @@ listę muzyki do odtwarzania.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p0
+%patch11 -p0
 find . -type d -name .xvpics -exec rm -rf {} \; ||:
 
 %build
@@ -107,8 +110,8 @@ CXX="%{__cc}"
 LINK="%{__cc}"
 DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
 	-DPKGDATADIR=\\\"%{_datadir}/Chromium-0.9\\\" -DUSE_SDL \
-	`sdl-config --cflags` -DOLD_OPENAL -DAUDIO_OPENAL -D_REENTRANT \
-	-I../../include -I../support/openal/linux/include -I../support/openal/include"
+	`sdl-config --cflags` -DAUDIO_OPENAL -D_REENTRANT \
+	-I../../include"
 OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
 QTDIR=%{_prefix}
 export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR CHROMIUM_DATA
