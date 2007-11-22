@@ -3,7 +3,7 @@ Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl.UTF-8):	Chromium B.S.U. to szybko tocząca się strzelanina
 Name:		chromium
 Version:	0.9.12
-Release:	10
+Release:	11
 License:	Artistic
 Group:		X11/Applications/Games
 Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
@@ -139,7 +139,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE
 %attr(755,root,root) %{_bindir}/chromium
-%{_datadir}/*
+%{_datadir}/Chromium-*
+%{_datadir}/applications/*.desktop
 %{_pixmapsdir}/chromium.png
 %{_desktopdir}/%{name}.desktop
 
