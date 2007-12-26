@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Chromium
 Comment=A fast paced, arcade-style space shooter
 Comment[de]=Ein schnelles Arcade Weltraum Ballerspiel
 Comment[ja]=クロミウム
-Icon=chromium.png
+Icon=chromium
 Exec=chromium
 Terminal=false
 Categories=Game;ArcadeGame;

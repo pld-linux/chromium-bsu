@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Chromium-Setup
 Comment=A configuration editor for Chromium
 Comment[de]=Das Konfigurationsprogramm von Chromium
 Comment[pl]=Konfigurator Chromium
-Icon=chromium.png
+Icon=chromium
 Exec=chromium-setup
 Terminal=false
 Categories=Settings;
