@@ -140,7 +140,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE
 %attr(755,root,root) %{_bindir}/chromium
 %{_datadir}/Chromium-*
-%{_datadir}/applications/*.desktop
 %{_pixmapsdir}/chromium.png
 %{_desktopdir}/%{name}.desktop
 
