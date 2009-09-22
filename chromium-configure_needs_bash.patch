@@ -1,9 +1,0 @@
-diff -Nru Chromium-0.9/configure Chromium-0.9-new/configure
---- Chromium-0.9/configure	Fri May 11 07:17:12 2001
-+++ Chromium-0.9-new/configure	Sat Dec 22 01:49:01 2001
-@@ -1,4 +1,4 @@
--#!/bin/sh
-+#!/bin/bash
- 
- ## Minimum versions of libs
- ###################################
