@@ -1,17 +1,14 @@
-# TODO:
-#  cvs cp chromium chromium-bsu
-#
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl.UTF-8):	Chromium B.S.U. to szybko tocząca się strzelanina
-Name:		chromium
+Name:		chromium-bsu
 Version:	0.9.14
-Release:	0.1
+Release:	1
 License:	Artistic
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/chromium-bsu/%{name}-bsu-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/chromium-bsu/%{name}-%{version}.tar.gz
 # Source0-md5:	26df69b13e2ca370b6b45ac8e9efddd5
 Patch0:		%{name}-bashizm.patch
-URL:		http://www.reptilelabour.com/software/chromium/
+URL:		http://chromium-bsu.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
@@ -29,6 +26,7 @@ BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	smpeg-devel >= 0.4.2
 BuildRequires:	zlib-devel
+Obsoletes:	chromium
 Obsoletes:	chromium-setup
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,7 +64,7 @@ flotę automatycznych myśliwców, którymi możesz kierować ze statku.
   myśliwiec zwraca amunicję tak, że następny może ją przejąć.
 
 %prep
-%setup -q -n %{name}-bsu-%{version}
+%setup -q
 %patch0 -p1
 
 %build
@@ -84,18 +82,18 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-bsu
+rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}
 
-%find_lang %{name}-bsu
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{name}-bsu.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc COPYING ChangeLog NEWS README TODO data/doc/images data/doc/{faq,info}.htm
-%attr(755,root,root) %{_bindir}/chromium-bsu
-%{_datadir}/%{name}-bsu
-%{_pixmapsdir}/chromium-bsu.png
-%{_desktopdir}/%{name}-bsu.desktop
+%attr(755,root,root) %{_bindir}/%{name}
+%{_datadir}/%{name}
+%{_pixmapsdir}/%{name}.png
+%{_desktopdir}/%{name}.desktop
 %{_mandir}/man6/*.6*
