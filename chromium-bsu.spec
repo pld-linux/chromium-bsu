@@ -1,40 +1,35 @@
-# TODO: make separate package with openal or use external source
+# TODO:
+#  cvs cp chromium chromium-bsu
+#
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl.UTF-8):	Chromium B.S.U. to szybko tocząca się strzelanina
 Name:		chromium
-Version:	0.9.12
-Release:	12
+Version:	0.9.14
+Release:	0.1
 License:	Artistic
 Group:		X11/Applications/Games
-Source0:	http://www.reptilelabour.com/software/files/chromium/%{name}-src-%{version}.tar.gz
-# Source0-md5:	969883f2f20f10cd6cdb380582f130c4
-Source1:	http://www.reptilelabour.com/software/files/chromium/%{name}-data-%{version}.tar.gz
-# Source1-md5:	173fdf76f1e4d7496142cd5662456a73
-Source2:	%{name}.desktop
-Source3:	%{name}-setup.desktop
-Source4:	%{name}.png
-Patch0:		%{name}-fix-flags.patch
-Patch1:		%{name}-glibc-2.2.2.patch
-Patch2:		%{name}-gcc3.patch
-Patch3:		%{name}-fix-openal-configurecall.patch
-Patch4:		%{name}-configure_needs_bash.patch
-Patch5:		%{name}-qt.patch
-Patch6:		%{name}-use_proper_CC.patch
-Patch7:		%{name}-fix-qt3.patch
-Patch8:		%{name}-ac_fix.patch
-Patch9:		%{name}-shared-zlib.patch
-Patch10:	%{name}-libvorbisfile.patch
-Patch11:	%{name}-freealut.patch
+Source0:	http://dl.sourceforge.net/chromium-bsu/%{name}-bsu-%{version}.tar.gz
+# Source0-md5:	26df69b13e2ca370b6b45ac8e9efddd5
+Patch0:		%{name}-bashizm.patch
 URL:		http://www.reptilelabour.com/software/chromium/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.1.6
+BuildRequires:	SDL_image-devel
+BuildRequires:	SDL_mixer-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	fontconfig-devel
 BuildRequires:	freealut-devel
+BuildRequires:	ftgl-devel >= 2.1.3
+BuildRequires:	gettext-devel
+BuildRequires:	libglpng-devel
 BuildRequires:	libogg-devel
-BuildRequires:	libvorbis-devel
+BuildRequires:	libtool
+BuildRequires:	pkgconfig
 BuildRequires:	smpeg-devel >= 0.4.2
-BuildRequires:	qt-devel
 BuildRequires:	zlib-devel
+Obsoletes:	chromium-setup
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
@@ -70,81 +65,37 @@ flotę automatycznych myśliwców, którymi możesz kierować ze statku.
 - Autodestrukcja pozwala zachować amunicję - przed wysadzeniem się
   myśliwiec zwraca amunicję tak, że następny może ją przejąć.
 
-%package setup
-Summary:	Setup frontend for Chromium
-Summary(pl.UTF-8):	Graficzny konfigurator Chromium
-Group:		X11/Applications/Games
-Requires:	%{name} = %{version}-%{release}
-
-%description setup
-This package contains the setup frontend (using Qt) to ease
-configuration of Chromium, especially for its playlist features.
-
-%description setup -l pl.UTF-8
-Ten pakiet zawiera graficzny konfigurator (napisany w Qt) ułatwiający
-ustalanie parametrów dla gry Chromium, szczególnie jeśli chodzi o
-listę muzyki do odtwarzania.
-
 %prep
-%setup -q -n Chromium-0.9 -a 1
-%patch0 -p0
-%patch1 -p0
-%patch2 -p0
-%patch3 -p0
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p0
-%patch11 -p0
-find . -type d -name .xvpics -exec rm -rf {} \; ||:
+%setup -q -n %{name}-bsu-%{version}
+%patch0 -p1
 
 %build
-CHROMIUM_DATA=Chromium-0.9/data
-CFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
-CXXFLAGS="%{rpmcflags} -fno-omit-frame-pointer -pipe"
-CC="%{__cc}"
-CXX="%{__cc}"
-LINK="%{__cc}"
-DEFS="%{rpmcflags} -DGAMESBINDIR=\\\"%{_bindir}\\\" \
-	-DPKGDATADIR=\\\"%{_datadir}/Chromium-0.9\\\" -DUSE_SDL \
-	`sdl-config --cflags` -DAUDIO_OPENAL -D_REENTRANT \
-	-I../../include"
-OPENAL_CONFIG_OPTS="./configure --with-gcc=%{__cc}"
-QTDIR=%{_prefix}
-export CFLAGS CXXFLAGS CC CXX LINK DEFS OPENAL_CONFIG_OPTS QTDIR CHROMIUM_DATA
-./configure --enable-vorbis
+%{__gettextize}
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir},%{_datadir}}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install bin/* $RPM_BUILD_ROOT%{_bindir}
+rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}-bsu
 
-install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
-
-#This installs datafiles
-tar zxvf %{SOURCE1} -C $RPM_BUILD_ROOT%{_datadir}
-find . -type d -name CVS -exec rm -rf {} \; ||:
+%find_lang %{name}-bsu
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}-bsu.lang
 %defattr(644,root,root,755)
-%doc LICENSE
-%attr(755,root,root) %{_bindir}/chromium
-%{_datadir}/Chromium-*
-%{_pixmapsdir}/chromium.png
-%{_desktopdir}/%{name}.desktop
-
-%files setup
-%defattr(644,root,root,755)
-%doc README
-%attr(755,root,root) %{_bindir}/chromium-setup
-%{_desktopdir}/%{name}-setup.desktop
+%doc COPYING ChangeLog NEWS README TODO data/doc/images data/doc/{faq,info}.htm
+%attr(755,root,root) %{_bindir}/chromium-bsu
+%{_datadir}/%{name}-bsu
+%{_pixmapsdir}/chromium-bsu.png
+%{_desktopdir}/%{name}-bsu.desktop
+%{_mandir}/man6/*.6*
