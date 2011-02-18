@@ -1,13 +1,12 @@
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl.UTF-8):	Chromium B.S.U. to szybko tocząca się strzelanina
 Name:		chromium-bsu
-Version:	0.9.14
+Version:	0.9.15
 Release:	1
 License:	Artistic
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/chromium-bsu/%{name}-%{version}.tar.gz
-# Source0-md5:	26df69b13e2ca370b6b45ac8e9efddd5
-Patch0:		%{name}-bashizm.patch
+# Source0-md5:	d57137a1ac2292363b35192724c7e3be
 URL:		http://chromium-bsu.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -65,7 +64,6 @@ flotę automatycznych myśliwców, którymi możesz kierować ze statku.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__gettextize}
@@ -91,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc COPYING ChangeLog NEWS README TODO data/doc/images data/doc/{faq,info}.htm
+%doc COPYING ChangeLog NEWS README data/doc/images data/doc/{faq,info}.htm
 %attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_pixmapsdir}/%{name}.png
