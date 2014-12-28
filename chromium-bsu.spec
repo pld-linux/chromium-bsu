@@ -18,7 +18,7 @@ BuildRequires:	automake
 BuildRequires:	fontconfig-devel
 BuildRequires:	freealut-devel
 BuildRequires:	ftgl-devel >= 2.1.3
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	libglpng-devel
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
