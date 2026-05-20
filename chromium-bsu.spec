@@ -1,12 +1,12 @@
 Summary:	Chromium B.S.U. is a fast paced, arcade-style space shooter
 Summary(pl.UTF-8):	Chromium B.S.U. to szybko tocząca się strzelanina
 Name:		chromium-bsu
-Version:	0.9.15
-Release:	2
+Version:	0.9.16.1
+Release:	1
 License:	Artistic
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/chromium-bsu/%{name}-%{version}.tar.gz
-# Source0-md5:	d57137a1ac2292363b35192724c7e3be
+# Source0-md5:	acc28b2b46567e4a2946031005155a43
 URL:		http://chromium-bsu.sourceforge.net/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -19,11 +19,8 @@ BuildRequires:	fontconfig-devel
 BuildRequires:	freealut-devel
 BuildRequires:	ftgl-devel >= 2.1.3
 BuildRequires:	gettext-tools
-BuildRequires:	libglpng-devel
-BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	smpeg-devel >= 0.4.2
 BuildRequires:	zlib-devel
 Obsoletes:	chromium
 Obsoletes:	chromium-setup
@@ -89,9 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc COPYING ChangeLog NEWS README data/doc/images data/doc/{faq,info}.htm
+%doc COPYING ChangeLog NEWS README data/doc/images data/doc/{faq,info}.html
 %attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/%{name}
-%{_pixmapsdir}/%{name}.png
+%{_iconsdir}/hicolor/64x64/apps/%{name}.png
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man6/*.6*
